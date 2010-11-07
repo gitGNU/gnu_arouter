@@ -55,7 +55,7 @@ class Router(object):
         """
         Get edges of a line.
         """
-        n = ct.c_int()
+        n = ct.c_uint()
         p_ptr = lib.get_points(line, ct.byref(n))
         p = ct.cast(p_ptr, ct.POINTER(ct.POINTER(ct.c_double) * n.value))
         edges = tuple((p.contents[i][0], p.contents[i][1]) for i in range(n.value))
