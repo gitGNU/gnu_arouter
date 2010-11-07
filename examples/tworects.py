@@ -24,7 +24,7 @@ Create 4 rectangles
 - target
 - two obstacles
 
-Line is routed from source to target avoiding obstacles.
+Two lines are routed from source to target avoiding obstacles.
 """
 
 import arouter
@@ -37,10 +37,12 @@ o2 = router.add(((150, 130), (170, 160)))
 d = router.add(((200, 100), (220, 120)))
 
 
-l = router.connect(s, d)
+l1 = router.connect(s, d)
+l2 = router.connect(s, d)
 
 router.route()
 
-print router.edges(l)
+print router.edges(l1)
+print router.edges(l2)
 
 # vim: sw=4:et:ai
