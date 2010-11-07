@@ -41,17 +41,21 @@ Avoid::ShapeRef *add_shape(Avoid::Router *router, double p[2][2]) {
     Avoid::ShapeRef *shape = new Avoid::ShapeRef(router, rect);
     router->addShape(shape);
 
-    // create connection pins on the edge of rectangle
-    new Avoid::ShapeConnectionPin(shape, EDGE_PIN, 0.5, 0.0, 0, Avoid::ConnDirUp);
-    new Avoid::ShapeConnectionPin(shape, EDGE_PIN, 0.5, 1.0, 0, Avoid::ConnDirDown);
-    new Avoid::ShapeConnectionPin(shape, EDGE_PIN, 0.0, 0.5, 0, Avoid::ConnDirLeft);
-    new Avoid::ShapeConnectionPin(shape, EDGE_PIN, 1.0, 0.5, 0, Avoid::ConnDirRight);
+    // create connection pins on the edge of rectangle; by default 3 pins
+    // per an edge
+    double pt;
+    for (int i = 1; i < 4; i++) {
+        pt = i * 0.25;
+        new Avoid::ShapeConnectionPin(shape, EDGE_PIN, pt, 0.0, 0, Avoid::ConnDirUp);
+        new Avoid::ShapeConnectionPin(shape, EDGE_PIN, pt, 1.0, 0, Avoid::ConnDirDown);
+        new Avoid::ShapeConnectionPin(shape, EDGE_PIN, 0.0, pt, 0, Avoid::ConnDirLeft);
+        new Avoid::ShapeConnectionPin(shape, EDGE_PIN, 1.0, pt, 0, Avoid::ConnDirRight);
+    }
 
     return shape;
 }
 
 Avoid::ConnRef *connect_shapes(Avoid::Router *router, Avoid::ShapeRef *start, Avoid::ShapeRef *end) {
-
     Avoid::ConnEnd s(start, EDGE_PIN);
     Avoid::ConnEnd e(end, EDGE_PIN);
     Avoid::ConnRef *connector = new Avoid::ConnRef(router, s, e);
