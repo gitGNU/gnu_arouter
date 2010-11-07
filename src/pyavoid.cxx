@@ -55,7 +55,7 @@ Avoid::ConnRef *connect_shapes(Avoid::Router *router, Avoid::ShapeRef *start, Av
     Avoid::ConnEnd s(start, EDGE_PIN);
     Avoid::ConnEnd e(end, EDGE_PIN);
     Avoid::ConnRef *connector = new Avoid::ConnRef(router, s, e);
-    connector->setRoutingType((Avoid::ConnType)2);
+    connector->setRoutingType(Avoid::ConnType_Orthogonal);
     return connector;
 }
 
@@ -63,7 +63,7 @@ Avoid::ConnRef *connect_points(Avoid::Router *router, double start[2], double en
     Avoid::Point p1(start[0], start[1]);
     Avoid::Point p2(end[0], end[1]);
     Avoid::ConnRef *connector = new Avoid::ConnRef(router, p1, p2);
-    connector->setRoutingType((Avoid::ConnType)2);
+    connector->setRoutingType(Avoid::ConnType_Orthogonal);
     return connector;
 }
 
@@ -72,7 +72,7 @@ void route(Avoid::Router *router) {
     router->outputInstanceToSVG("pyavoid");
 }
 
-double **get_points(Avoid::ConnRef *connector, int *n) {
+double **get_points(Avoid::ConnRef *connector, unsigned int *n) {
     Avoid::PolyLine line = connector->displayRoute();
     *n = line.size();
     double **points = new double*[*n];
