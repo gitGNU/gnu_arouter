@@ -17,17 +17,27 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
+"""
+Create 4 rectangles
+
+- source
+- target
+- two obstacles
+
+Line is routed from source to target avoiding obstacles.
+"""
+
 import arouter
 
 router = arouter.Router()
 
-r1 = router.add(((0, 100), (20, 120)))
-r2 = router.add(((100, 80), (120, 140)))
-r3 = router.add(((150, 130), (170, 160)))
-r4 = router.add(((200, 100), (220, 120)))
+s = router.add(((0, 100), (20, 120)))
+o1 = router.add(((100, 80), (120, 140)))
+o2 = router.add(((150, 130), (170, 160)))
+d = router.add(((200, 100), (220, 120)))
 
 
-l = router.connect(r1, r4)
+l = router.connect(s, d)
 
 router.route()
 
