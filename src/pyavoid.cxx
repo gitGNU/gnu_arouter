@@ -39,7 +39,6 @@ Avoid::Router *create_router() {
 Avoid::ShapeRef *add_shape(Avoid::Router *router, double p[2][2]) {
     Avoid::Rectangle rect(Avoid::Point(p[0][0], p[0][1]), Avoid::Point(p[1][0], p[1][1]));
     Avoid::ShapeRef *shape = new Avoid::ShapeRef(router, rect);
-    router->addShape(shape);
 
     // create connection pins on the edge of rectangle; by default 3 pins
     // per an edge
