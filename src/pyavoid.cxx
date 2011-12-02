@@ -43,8 +43,8 @@ Avoid::ShapeRef *add_shape(Avoid::Router *router, double p[2][2]) {
     // create connection pins on the edge of rectangle; by default 3 pins
     // per an edge
     double pt;
-    for (int i = 1; i < 4; i++) {
-        pt = i * 0.25;
+    for (int i = 1; i < 10; i++) {
+        pt = i * 0.10;
         new Avoid::ShapeConnectionPin(shape, EDGE_PIN, pt, 0.0, 0, Avoid::ConnDirUp);
         new Avoid::ShapeConnectionPin(shape, EDGE_PIN, pt, 1.0, 0, Avoid::ConnDirDown);
         new Avoid::ShapeConnectionPin(shape, EDGE_PIN, 0.0, pt, 0, Avoid::ConnDirLeft);
