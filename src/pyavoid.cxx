@@ -24,7 +24,8 @@
 #define EDGE_PIN    0x01
 
 Avoid::Router *create_router() {
-    Avoid::Router *router = new Avoid::Router(Avoid::OrthogonalRouting);
+    Avoid::Router *router = new Avoid::Router(Avoid::PolyLineRouting);
+    //Avoid::Router *router = new Avoid::Router(Avoid::OrthogonalRouting);
 
     router->setRoutingPenalty(Avoid::segmentPenalty, 10);
     router->setRoutingPenalty(Avoid::anglePenalty, 10);
