@@ -37,6 +37,13 @@ setup(
     author='Artur Wroblewski',
     author_email='wrobell@pld-linux.org',
     description="""Line router using libavoid library.""",
+    classifiers=[
+        'License :: OSI Approved :: GNU General Public License (GPL)',
+        'Programming Language :: Python',
+        'Programming Language :: Python :: 3',
+        'Development Status :: 3 - Alpha',
+        'Topic :: Software Development :: Libraries',
+    ],
     package_dir={'': 'src'},
     packages=['arouter'],
     ext_modules=[avoid_module],
