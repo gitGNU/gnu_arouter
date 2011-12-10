@@ -42,7 +42,7 @@ l2 = router.connect(s, d)
 
 router.route()
 
-print router.edges(l1)
-print router.edges(l2)
+print(router.edges(l1))
+print(router.edges(l2))
 
 # vim: sw=4:et:ai

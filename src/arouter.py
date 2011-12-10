@@ -17,10 +17,12 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
+import sysconfig
 import ctypes as ct
+from ctypes.util import find_library
 
-lib = ct.CDLL('_pyavoid.so')
-clib = ct.CDLL('libc.so.6')
+lib = ct.CDLL('_pyavoid{}'.format(sysconfig.get_config_var('SO')))
+clib = ct.CDLL(find_library('c'))
 
 Point = ct.c_double * 2
 Rectangle = Point * 2
