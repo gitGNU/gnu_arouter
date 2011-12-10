@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 #
 # ARouter - line routing using libavoid library.
@@ -24,19 +24,23 @@
 Build setup for arouter library.
 """
 
-from distutils.core import setup, Extension
-
+from setuptools import setup, find_packages, Extension
 
 avoid_module = Extension('_pyavoid',
    sources=['src/pyavoid.cxx'],
    libraries=['avoid'],
    include_dirs=['src'])
 
-setup(name='arouter',
+setup(
+    name='arouter',
     version='0.1.0',
-    author='Artur Wroblewski <wrobell@pld-linux.org>',
+    author='Artur Wroblewski',
+    author_email='wrobell@pld-linux.org',
     description="""Line router using libavoid library.""",
+    package_dir={'': 'src'},
+    packages=['arouter'],
     ext_modules=[avoid_module],
-    py_modules=['arouter'])
+    include_package_data=True,
+)
 
 # vim: sw=4:et:ai

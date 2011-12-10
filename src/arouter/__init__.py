@@ -17,11 +17,13 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-import sysconfig
+import sysconfig, pkg_resources, os.path
 import ctypes as ct
 from ctypes.util import find_library
 
-lib = ct.CDLL('_pyavoid{}'.format(sysconfig.get_config_var('SO')))
+__name = '_pyavoid{}'.format(sysconfig.get_config_var('SO'))
+__fn = os.path.join(os.path.dirname(__file__), '..', __name)
+lib = ct.CDLL(__fn)
 clib = ct.CDLL(find_library('c'))
 
 Point = ct.c_double * 2
