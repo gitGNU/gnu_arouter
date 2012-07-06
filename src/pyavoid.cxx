@@ -69,7 +69,7 @@ double **get_points(Avoid::ConnRef *connector, unsigned int *n) {
     Avoid::PolyLine line = connector->displayRoute();
     *n = line.size();
     double **points = new double*[*n];
-    for (size_t i = 0; i < *n; ++i) {
+    for (size_t i = 0; i < *n; i++) {
         Avoid::Point point = line.at(i);
         points[i] = new double[2];
         points[i][0] = point.x;
