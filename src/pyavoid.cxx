@@ -21,7 +21,7 @@
 #include <pyavoid.h>
 #include <stdio.h>
 
-#define EDGE_PIN    0x01
+#define CONN_PIN    0x01
 
 Avoid::Router *create_router() {
     //Avoid::Router *router = new Avoid::Router(Avoid::PolyLineRouting);
@@ -33,31 +33,20 @@ Avoid::Router *create_router() {
     router->setRoutingParameter(Avoid::clusterCrossingPenalty, 0);
 
     router->setRoutingOption(Avoid::nudgeOrthogonalSegmentsConnectedToShapes, true);
+    router->setOrthogonalNudgeDistance(13);
     return router;
 }
 
 Avoid::ShapeRef *add_shape(Avoid::Router *router, double p[2][2]) {
     Avoid::Rectangle rect(Avoid::Point(p[0][0], p[0][1]), Avoid::Point(p[1][0], p[1][1]));
     Avoid::ShapeRef *shape = new Avoid::ShapeRef(router, rect);
-
-    // create connection pins on the edge of rectangle; by default 4 pins
-    // per an edge
-    double pt;
-    for (int i = 1; i < 5; i++) {
-        pt = i * 0.20;
-        new Avoid::ShapeConnectionPin(shape, EDGE_PIN, pt, 0.0, 3, Avoid::ConnDirUp);
-        new Avoid::ShapeConnectionPin(shape, EDGE_PIN, pt, 1.0, 3, Avoid::ConnDirDown);
-        new Avoid::ShapeConnectionPin(shape, EDGE_PIN, 0.0, pt, 3, Avoid::ConnDirLeft);
-        new Avoid::ShapeConnectionPin(shape, EDGE_PIN, 1.0, pt, 3, Avoid::ConnDirRight);
-
-    }
-
+    new Avoid::ShapeConnectionPin(shape, CONN_PIN, Avoid::ATTACH_POS_CENTRE, Avoid::ATTACH_POS_CENTRE, 5);
     return shape;
 }
 
 Avoid::ConnRef *connect_shapes(Avoid::Router *router, Avoid::ShapeRef *start, Avoid::ShapeRef *end) {
-    Avoid::ConnEnd s(start, EDGE_PIN);
-    Avoid::ConnEnd e(end, EDGE_PIN);
+    Avoid::ConnEnd s(start, CONN_PIN);
+    Avoid::ConnEnd e(end, CONN_PIN);
     Avoid::ConnRef *connector = new Avoid::ConnRef(router, s, e);
     connector->setRoutingType(Avoid::ConnType_Orthogonal);
     return connector;

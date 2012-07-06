@@ -48,5 +48,6 @@ router.route()
 
 print(router.edges(l1))
 print(router.edges(l2))
+print(router.edges(l3))
 
 # vim: sw=4:et:ai
