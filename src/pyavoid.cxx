@@ -24,16 +24,15 @@
 #define EDGE_PIN    0x01
 
 Avoid::Router *create_router() {
-    Avoid::Router *router = new Avoid::Router(Avoid::PolyLineRouting);
-    //Avoid::Router *router = new Avoid::Router(Avoid::OrthogonalRouting);
+    //Avoid::Router *router = new Avoid::Router(Avoid::PolyLineRouting);
+    Avoid::Router *router = new Avoid::Router(Avoid::OrthogonalRouting);
 
-    router->setRoutingPenalty(Avoid::segmentPenalty, 10);
-    router->setRoutingPenalty(Avoid::anglePenalty, 10);
-    router->setRoutingPenalty(Avoid::crossingPenalty, 10);
-    router->setRoutingPenalty(Avoid::clusterCrossingPenalty, 10);
-    router->setRoutingPenalty(Avoid::fixedSharedPathPenalty, 10);
+    router->setRoutingParameter(Avoid::segmentPenalty, 10);
+    router->setRoutingParameter(Avoid::anglePenalty, 10);
+    router->setRoutingParameter(Avoid::crossingPenalty, 4000);
+    router->setRoutingParameter(Avoid::clusterCrossingPenalty, 0);
 
-    router->setOrthogonalNudgeDistance(5);
+    router->setRoutingOption(Avoid::nudgeOrthogonalSegmentsConnectedToShapes, true);
     return router;
 }
 
@@ -41,15 +40,16 @@ Avoid::ShapeRef *add_shape(Avoid::Router *router, double p[2][2]) {
     Avoid::Rectangle rect(Avoid::Point(p[0][0], p[0][1]), Avoid::Point(p[1][0], p[1][1]));
     Avoid::ShapeRef *shape = new Avoid::ShapeRef(router, rect);
 
-    // create connection pins on the edge of rectangle; by default 3 pins
+    // create connection pins on the edge of rectangle; by default 4 pins
     // per an edge
     double pt;
-    for (int i = 1; i < 10; i++) {
-        pt = i * 0.10;
-        new Avoid::ShapeConnectionPin(shape, EDGE_PIN, pt, 0.0, 0, Avoid::ConnDirUp);
-        new Avoid::ShapeConnectionPin(shape, EDGE_PIN, pt, 1.0, 0, Avoid::ConnDirDown);
-        new Avoid::ShapeConnectionPin(shape, EDGE_PIN, 0.0, pt, 0, Avoid::ConnDirLeft);
-        new Avoid::ShapeConnectionPin(shape, EDGE_PIN, 1.0, pt, 0, Avoid::ConnDirRight);
+    for (int i = 1; i < 5; i++) {
+        pt = i * 0.20;
+        new Avoid::ShapeConnectionPin(shape, EDGE_PIN, pt, 0.0, 3, Avoid::ConnDirUp);
+        new Avoid::ShapeConnectionPin(shape, EDGE_PIN, pt, 1.0, 3, Avoid::ConnDirDown);
+        new Avoid::ShapeConnectionPin(shape, EDGE_PIN, 0.0, pt, 3, Avoid::ConnDirLeft);
+        new Avoid::ShapeConnectionPin(shape, EDGE_PIN, 1.0, pt, 3, Avoid::ConnDirRight);
+
     }
 
     return shape;

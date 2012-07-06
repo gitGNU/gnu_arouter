@@ -32,13 +32,17 @@ import arouter
 router = arouter.Router()
 
 s = router.add(((0, 100), (20, 120)))
-o1 = router.add(((100, 80), (120, 140)))
-o2 = router.add(((150, 130), (170, 160)))
+o1 = router.add(((100, 50), (120, 70)))
+o2 = router.add(((100, 80), (120, 140)))
+o3 = router.add(((150, 130), (170, 160)))
 d = router.add(((200, 100), (220, 120)))
 
 
 l1 = router.connect(s, d)
 l2 = router.connect(s, d)
+l3 = router.connect(s, d)
+l4 = router.connect(s, d)
+l5 = router.connect(s, d)
 
 router.route()
 
