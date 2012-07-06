@@ -33,7 +33,7 @@ avoid_module = Extension('_pyavoid',
 
 setup(
     name='arouter',
-    version='0.1.0',
+    version='0.2.0',
     author='Artur Wroblewski',
     author_email='wrobell@pld-linux.org',
     description="""Line router using libavoid library.""",
