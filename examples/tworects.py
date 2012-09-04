@@ -40,14 +40,10 @@ d = router.add(((200, 100), (220, 120)))
 
 l1 = router.connect(s, d)
 l2 = router.connect(s, d)
-l3 = router.connect(s, d)
-l4 = router.connect(s, d)
-l5 = router.connect(s, d)
 
 router.route()
 
 print(router.edges(l1))
 print(router.edges(l2))
-print(router.edges(l3))
 
 # vim: sw=4:et:ai
